@@ -1,7 +1,10 @@
-import { useState } from 'react'
+import Accordion from './components/Accordion/index';
+
 function App() {
   return(
-    <div>Hello React</div>
+  <>
+    <Accordion />
+  </>
   )
 }
 
