@@ -1,4 +1,7 @@
-import { useState } from 'react'
+import _ from 'lodash'
+import { v4 } from 'uuid'
+import dayjs from 'dayjs'
+import { useRef, useState } from 'react'
 import './BiliComment.scss'
 import avatar from './images/bozai.png'
 
@@ -24,7 +27,7 @@ const defaultList = [
     content: '哎哟，不错哦',
     // 评论时间
     ctime: '10-18 08:15',
-    like: 88,
+    like: 108,
   },
   {
     rpid: 2,
@@ -46,7 +49,7 @@ const defaultList = [
     },
     content: '学前端就来黑马',
     ctime: '10-19 09:00',
-    like: 66,
+    like: 666,
   },
 ]
 // 当前登录用户信息
@@ -76,17 +79,61 @@ const tabs = [
 
 const Comment = () => {
 
-  const [commentList, setCommentList] = useState(defaultList)
+  // const [commentList, setCommentList] = useState(defaultList)
+  // tab栏默认为最热 所以一开始就要处理排序
+  const [commentList, setCommentList] = useState(_.orderBy(defaultList,['like'], 'desc'))
 
   const [type, setType] = useState('hot')
 
+  // 输入框内容
+  const [text,setText] = useState('')
+
+  // 使用ref获取dom元素并且获取焦点
+  const textareaRef = useRef(null)
+
+  // 处理删除的函数
   const handleDelete = (uid) => {
     setCommentList(commentList.filter(item => item.rpid !== uid))
   }
 
+  // 处理Tab栏的切换函数
   const handleChangeTab = (type) => {
     console.log(type);
     setType(type)
+    // 处理排序功能 使用lodash库
+    if(type === 'hot'){
+      setCommentList(_.orderBy(commentList,['like'], 'desc'))
+    }else{
+      setCommentList(_.orderBy(commentList, ['ctime'], 'desc'))
+    }
+  }
+  // 实现发布功能：
+  // 1.首先实现输入框和state的双向绑定
+  // 2.点击发布按钮后，使得列表更新并重新渲染
+  // 3.清除输入框的内容，并且获得焦点
+  //   获取焦点：
+  //   使用ref
+  // 处理发布功能的函数
+  const handlePublish = () => {
+    setCommentList(
+      [
+        {
+          rpid: v4(),
+          user: {
+            uid: '30009257',
+            avatar,
+            uname: '黑马前端',
+          },
+          content: text,
+          ctime: dayjs(new Date()).format('MM-DD HH:mm'),
+          like: 666,
+        },
+        ...commentList,
+      ]
+    )
+    // 清空内容并获取焦点
+    setText("")
+    textareaRef.current.focus()
   }
 
   return (
@@ -120,10 +167,13 @@ const Comment = () => {
             <textarea
               className="reply-box-textarea"
               placeholder="发一条友善的评论"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              ref={textareaRef}
             />
             {/* 发布按钮 */}
             <div className="reply-box-send">
-              <div className="send-text">发布</div>
+              <div className="send-text" onClick={handlePublish}>发布</div>
             </div>
           </div>
         </div>

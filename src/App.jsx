@@ -5,6 +5,7 @@ function App() {
   return(
   <>
     <Accordion />
+    <hr />
     <Comment />
   </>
   )

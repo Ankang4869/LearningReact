@@ -1,8 +1,19 @@
-# React + Vite
+# LearningReact
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+准备以慢慢学习项目的方式学一下react，以此记录一下:
 
-Currently, two official plugins are available:
+## Day 1
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 叙述：
+实现了第一个react小项目Accordion，翻译过来大概是下拉框的意思。
+
+### 反思以及值得注意的点：
+...
+
+## Day 2
+
+### 概述：
+做了一个b站评论的小案例，同时学习了几个简单的库：dayjs，uuid，classnames，lodash的使用。
+
+### 反思以及值得注意的点：
+...
