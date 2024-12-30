@@ -1,5 +1,6 @@
 import Accordion from './components/Accordion/Accordion';
 import Comment from './components/BilibiliComment/Comment';
+import Comment2 from './components/BilibiliComment2/Comment2';
 
 function App() {
   return(
@@ -7,6 +8,8 @@ function App() {
     <Accordion />
     <hr />
     <Comment />
+    <hr />
+    <Comment2 />
   </>
   )
 }
