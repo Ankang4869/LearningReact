@@ -1,9 +1,11 @@
-import Accordion from './components/Accordion/index';
+import Accordion from './components/Accordion/Accordion';
+import Comment from './components/BilibiliComment/Comment';
 
 function App() {
   return(
   <>
     <Accordion />
+    <Comment />
   </>
   )
 }
